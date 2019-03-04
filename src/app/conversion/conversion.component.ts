@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { CurrencyService } from './currency.service';
+import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { initDomAdapter } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-conversion',
@@ -7,9 +11,64 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversionComponent implements OnInit {
 
-  constructor() { }
+    crypto: any = [];
+
+    rate1: any = [0];
+    rate2: any = [0];
+
+    input: any = [1];
+    output: any = [0];
+
+
+  constructor(public curr: CurrencyService) { }
 
   ngOnInit() {
+    //this.getCurrencies();
+    this.getCrypto();
   }
-
+  /*
+  getCurrencies() {
+    this.currency = [];
+    this.curr.getCurrencies().subscribe((data: {}) => {
+      console.log(data);
+      this.currency = data;
+    });
+  }*/
+  getCrypto() {
+    this.crypto = [];
+    this.curr.getCryptos().subscribe((data: {}) => {
+      let temp = data[Object.keys(data)[0]];
+      console.log(temp.filter(coin => coin.statuses.length === 2));
+      this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
+    });
+  }
+  getConversion1(event) {
+    this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
+      console.log(data['ticker']['price']);
+      if (typeof data === 'undefined') {
+        this.rate1 = 0;
+        alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
+        return;
+      }
+      this.rate1 = data['ticker']['price'];
+    });
+  }
+  getConversion2(event) {
+    console.log(event.target.selectedOptions['0'].value);
+    this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
+      if (typeof data === 'undefined') {
+        this.rate2 = 0;
+        alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
+        return;
+      }
+      this.rate2 = data['ticker']['price'];
+    });
+  }
+  convert(event) {
+    if (this.rate1 === 0 || this.rate2 === 0) {
+      alert('Both currencies must be selected!');
+      return;
+    }
+    this.output = this.input * this.rate1 / this.rate2;
+  }
 }
