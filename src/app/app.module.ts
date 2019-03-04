@@ -9,6 +9,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SpecificInformationComponent } from './specific-information/specific-information.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SpecificInformationComponent } from './specific-information/specific-in
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    NgbModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
