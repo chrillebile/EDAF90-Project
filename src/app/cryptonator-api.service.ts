@@ -13,7 +13,7 @@ export class CryptonatorAPIService {
   constructor(private http: HttpClient) { }
 
   findOneFull(id: string): Observable<CryptonatorCrypto> {
-    return this.http.get(API_URL + 'full/' + id)
+    return this.http.get(API_URL + 'full/' + id + '-usd')
       .pipe(map((item: any) => new CryptonatorCrypto(item.ticker)));
   }
 }
