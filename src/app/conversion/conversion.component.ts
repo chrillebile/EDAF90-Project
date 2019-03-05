@@ -13,11 +13,11 @@ export class ConversionComponent implements OnInit {
 
     crypto: any = [];
 
-    rate1: any = [0];
-    rate2: any = [0];
+    rate1: any = 0;
+    rate2: any = 0;
 
-    input: any = [1];
-    output: any = [0];
+    input: any = 1;
+    output: any = 0;
 
 
   constructor(public curr: CurrencyService) { }
@@ -44,8 +44,7 @@ export class ConversionComponent implements OnInit {
   }
   getConversion1(event) {
     this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
-      console.log(data['ticker']['price']);
-      if (typeof data === 'undefined') {
+      if (typeof data['ticker'] === 'undefined') {
         this.rate1 = 0;
         alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
         return;
@@ -54,9 +53,8 @@ export class ConversionComponent implements OnInit {
     });
   }
   getConversion2(event) {
-    console.log(event.target.selectedOptions['0'].value);
     this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
-      if (typeof data === 'undefined') {
+      if (typeof data['ticker'] === 'undefined') {
         this.rate2 = 0;
         alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
         return;
