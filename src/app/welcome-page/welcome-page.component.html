@@ -16,7 +16,19 @@
 
 <p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
 
-<table class="table table-striped">
+<button (click)="get_btc_usd()">GET /products</button>
+<ul>
+  <li *ngFor="let product of products" >
+    -- Base: {{product.base}}
+    -- Price: {{product.price}}
+    -- Volume: {{product.volume}}
+    -- Change: {{product.change}}
+  </li>
+</ul> 
+
+
+
+<!-- <table class="table table-striped">
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -33,4 +45,4 @@
       <td>{{elements.handle}}</td>
   </tr>
   </tbody>
-</table>
+</table> -->

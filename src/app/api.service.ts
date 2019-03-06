@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
   private apiURL: string = 'https://api.cryptonator.com/api/ticker/btc-usd';
-  private baseUrl : 'https://api.cryptonator.com/api/ticker/'
+  private baseUrl : string = 'https://api.cryptonator.com/api/ticker/'
   private products = [];
   constructor(private httpClient: HttpClient) {}
 
