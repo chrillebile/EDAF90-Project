@@ -18,7 +18,7 @@ export class ConversionComponent implements OnInit {
   input: any = 1;
   output: any = 0;
 
-  constructor(public curr: CurrencyService) {}
+  constructor(public currencyService: CurrencyService) {}
 
   ngOnInit() {
     //this.getCurrencies();
