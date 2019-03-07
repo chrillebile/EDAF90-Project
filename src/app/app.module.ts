@@ -11,6 +11,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { SpecificInformationComponent } from './specific-information/specific-information.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     WelcomePageComponent,
     ConversionComponent,
     FavoritesComponent,
-    SpecificInformationComponent
+    SpecificInformationComponent,
+    SpecificInformationCryptoComponent
   ],
   imports: [
     BrowserModule,
