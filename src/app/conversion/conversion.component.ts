@@ -39,7 +39,8 @@ export class ConversionComponent implements OnInit {
     this.curr.getCryptos().subscribe((data: {}) => {
       let temp = data[Object.keys(data)[0]];
       console.log(temp.filter(coin => coin.statuses.length === 2));
-      this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
+      //this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
+      this.crypto = temp.filter(coin => coin.statuses.length === 2);
     });
   }
   getConversion1(event) {
