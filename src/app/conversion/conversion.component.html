@@ -1,3 +1,54 @@
-<p>
-  conversion works!
-</p>
+<body>
+<h1>
+    Cryptocurrency calculator
+  </h1>
+  <br />
+  <br />
+  <div class="block">
+    Currency:
+    <select
+      required
+      name="Currency1"
+      id="currency_select1"
+      (change)="getConversion1($event)"
+      class="form-control"
+    >
+      <option selected disabled>Select Currency</option>
+      <option *ngFor="let cypto of crypto" [value]="cypto.code">
+        {{ cypto.name }} ({{ cypto.code }})
+      </option>
+    </select>
+    Conversion rate (USD): {{ rate1 }}
+    <br />
+    <br/>
+    Amount:
+    <input type="number" name="input_value" step="any" [(ngModel)]="input" class="form-control" />
+    <br />
+    <button (click)="convert($event)" class ="btn btn-info">Convert</button>
+  </div>
+  <div class="iconblock">
+      <p class="arrow"><span class="glyphicon glyphicon-circle-arrow-right"></span></p>
+  </div>
+  <div class="block">
+  Currency:
+  <select required name="Currency2" id="currency_select2"  (change)="getConversion2($event)" class="form-control">
+    <option selected disabled>Select Currency</option>
+    <option *ngFor="let cypto of crypto" [value]="cypto.code">
+      {{ cypto.name }} ({{ cypto.code }})
+    </option>
+  </select>
+  Conversion rate (USD): {{ rate2 }}
+  <br />
+  <br />
+  Converted amount:
+  <input
+    disabled
+    type="number"
+    name="input_value"
+    value="0"
+    step="any"
+    [(ngModel)]="output"
+    class="form-control"
+  />
+  </div>
+</body>
