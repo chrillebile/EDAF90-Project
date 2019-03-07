@@ -1,46 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CurrencyService } from 'src/app/conversion/currency.service';
+import { map, catchError, tap } from 'rxjs/operators';
+import {DecimalPipe} from '@angular/common';
+import {Observable} from 'rxjs';
 
 @Component({
-  // selector: 'ngbd-table-basic',
-   templateUrl: './welcome-page.component.html',
-  // styleUrls: ['./welcome-page.component.css'],
+  templateUrl: './welcome-page.component.html',
+  styleUrls: ['./welcome-page.component.css'],
+  //selector: 'ngbd-table-complete',
   })
-  export class WelcomePageComponent {
-    // elements: any = [
-    //   {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    //   {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    //   {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-    // ];
-
-    private baseUrl : string = 'https://api.cryptonator.com/api/ticker'
+  export class WelcomePageComponent implements OnInit{
+    headElements = ['#', 'Currency', 'Value', 'Change(24h)'];
+    crypto: any = [];
+    private baseUrl = 'https://api.cryptonator.com/api/ticker'
     private products = [];
     ngOnInit() {
+      for (let i = 1; i <= 15; i++) {
+        this.crypto.push({ id: i, first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i });
+      }
     }
-    get_btc_usd(){
-      this.httpClient.get(this.baseUrl).subscribe((res : any[])=>{
-      console.log(res);
-      this.products = res;
-      });
-  }
-    constructor(private httpClient: HttpClient){}
+    private extractData(res: Response) {
+      let body = res;
+      return body || { };
+      }
   
+  getCrypto() {
+    this.crypto = [];
+    this.curr.getCryptos().subscribe((data: {}) => {
+     let temp = data[Object.keys(data)[0]];
+      temp = temp.filter(coin => coin.statuses.length === 2);
+      temp.map(coin => {
+        this.getCryptoProps(coin.code);
+      }); 
+    });
   }
-
-
-
-/*
-@Component({
-  selector: 'app-welcome-page',
-  templateUrl: './welcome-page.component.html',
-  styleUrls: ['./welcome-page.component.css']
-})
-export class WelcomePageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  
+  getCryptoProps(cryptoCode){
+    this.httpClient.get('https://api.cryptonator.com/api/' + 'ticker/' + cryptoCode.toLowerCase() +  '-usd').subscribe(res => {
+    if(res.ticker){
+    this.crypto.push(res.ticker);
+    console.log(res.ticker);
+    }
+    });  
   }
-
-}
-*/
+  
+    constructor(public curr: CurrencyService, public httpClient: HttpClient){}
+  
+} 

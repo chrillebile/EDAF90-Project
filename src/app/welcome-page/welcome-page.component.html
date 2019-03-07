@@ -1,48 +1,95 @@
-<!-- <table mdbTable>
-  <thead class="black white-text">
-    <tr>
-      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr mdbTableCol *ngFor="let el of elements">
-      <th scope="row">{{el.id}}</th>
-      <td>{{el.first}}</td>
-      <td>{{el.last}}</td>
-      <td>{{el.handle}}</td>
-    </tr>
-  </tbody>
-</table> -->
 
 <p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
 
-<button (click)="get_btc_usd()">GET /products</button>
-<ul>
-  <li *ngFor="let product of products" >
-    -- Base: {{product.base}}
-    -- Price: {{product.price}}
-    -- Volume: {{product.volume}}
-    -- Change: {{product.change}}
-  </li>
-</ul> 
+<button (click)="getCrypto()">GET /products</button>
 
 
-
-<!-- <table class="table table-striped">
-  <thead>
+<table mdbTable class="z-depth-1">
+  <!-- <thead>
   <tr>
     <th scope="col">#</th>
     <th scope="col">Currency</th>
     <th scope="col">Value</th>
     <th scope="col">Change(24h)</th>
   </tr>
+  </thead> -->
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypto" [sortBy]="headElements[i]">{{head}}
+        <mdb-icon fas icon="sort"></mdb-icon>
+      </th>
+    </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let country of countries; index as i">
+  <tr *ngFor="let cryptoRow of crypto; index as i">
       <th scope="row">{{i + 1}}</th>
-      <td>{{elements.first}}</td>
-      <td>{{elements.last}}</td>
-      <td>{{elements.handle}}</td>
+      <td>{{cryptoRow.base}} </td>
+      <td>${{cryptoRow.price}}</td>
+      <!-- <td>{{cryptoRow.change}} </td> -->
+      <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
+  </tr>
+  </tbody>
+</table>
+
+<!-- <table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col" sortable="base" (sort)="onSort($event)">Base</th>
+    <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
+    <th scope="col" sortable="changes" (sort)="onSort($event)">Changes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cryptoElement of cryptos>
+    <th scope="row">{{ cryptoElement }}</th>
+    <td>
+      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
+      {{ cryptoElement.base }}
+    </td>
+    <td>{{ cryptoElement.price | number }}</td>
+    <td>{{ cryptoElement.changes | number }}</td>
   </tr>
   </tbody>
 </table> -->
+
+<!-- <form>
+  <div class="form-group form-inline">
+      Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
+      <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col" sortable="base" (sort)="onSort($event)">Base</th>
+      <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
+      <th scope="col" sortable="changes" (sort)="onSort($event)">Changes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cryptoElement of cryptos$ | async">
+      <th scope="row">{{ cryptoElement }}</th>
+      <td>
+        <ngb-highlight [result]="cryptoElement.base" [term]="service.searchTerm"></ngb-highlight>
+      </td>
+      <td><ngb-highlight [result]="cryptoElement.price | number" [term]="service.searchTerm"></ngb-highlight></td>
+      <td><ngb-highlight [result]="cryptoElement.change | number" [term]="service.searchTerm"></ngb-highlight></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination
+      [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+
+</form> -->
