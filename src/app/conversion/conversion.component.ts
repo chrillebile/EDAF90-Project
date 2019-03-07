@@ -1,26 +1,24 @@
-import { map } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { CurrencyService } from './currency.service';
-import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
-import { initDomAdapter } from '@angular/platform-browser/src/browser';
+import { map } from "rxjs/operators";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
+import { CurrencyService } from "./currency.service";
+import { AngularWaitBarrier } from "blocking-proxy/built/lib/angular_wait_barrier";
+import { initDomAdapter } from "@angular/platform-browser/src/browser";
 
 @Component({
-  selector: 'app-conversion',
-  templateUrl: './conversion.component.html',
-  styleUrls: ['./conversion.component.css']
+  selector: "app-conversion",
+  templateUrl: "./conversion.component.html",
+  styleUrls: ["./conversion.component.css"]
 })
 export class ConversionComponent implements OnInit {
+  crypto: any = [];
 
-    crypto: any = [];
+  rate1: any = 0;
+  rate2: any = 0;
 
-    rate1: any = 0;
-    rate2: any = 0;
+  input: any = 1;
+  output: any = 0;
 
-    input: any = 1;
-    output: any = 0;
-
-
-  constructor(public curr: CurrencyService) { }
+  constructor(public curr: CurrencyService) {}
 
   ngOnInit() {
     //this.getCurrencies();
@@ -44,30 +42,40 @@ export class ConversionComponent implements OnInit {
     });
   }
   getConversion1(event) {
-    this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
-      if (typeof data['ticker'] === 'undefined') {
-        this.rate1 = 0;
-        alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
-        return;
-      }
-      this.rate1 = data['ticker']['price'];
-    });
+    this.curr
+      .getCrypto(event.target.selectedOptions["0"].value)
+      .subscribe((data: {}) => {
+        if (typeof data["ticker"] === "undefined") {
+          this.rate1 = 0;
+          alert(
+            "could not find conversion for " +
+              event.target.selectedOptions["0"].value
+          );
+          return;
+        }
+        this.rate1 = data["ticker"]["price"];
+      });
   }
   getConversion2(event) {
-    this.curr.getCrypto(event.target.selectedOptions['0'].value).subscribe((data: {}) => {
-      if (typeof data['ticker'] === 'undefined') {
-        this.rate2 = 0;
-        alert('could not find conversion for ' + event.target.selectedOptions['0'].value);
-        return;
-      }
-      this.rate2 = data['ticker']['price'];
-    });
+    this.curr
+      .getCrypto(event.target.selectedOptions["0"].value)
+      .subscribe((data: {}) => {
+        if (typeof data["ticker"] === "undefined") {
+          this.rate2 = 0;
+          alert(
+            "could not find conversion for " +
+              event.target.selectedOptions["0"].value
+          );
+          return;
+        }
+        this.rate2 = data["ticker"]["price"];
+      });
   }
   convert(event) {
     if (this.rate1 === 0 || this.rate2 === 0) {
-      alert('Both currencies must be selected!');
+      alert("Both currencies must be selected!");
       return;
     }
-    this.output = this.input * this.rate1 / this.rate2;
+    this.output = (this.input * this.rate1) / this.rate2;
   }
 }
