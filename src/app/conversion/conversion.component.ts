@@ -31,7 +31,7 @@ export class ConversionComponent implements OnInit {
   }*/
   getCrypto() {
     this.crypto = [];
-    this.curr.getCryptos().subscribe((data: {}) => {
+    this.currencyService.getCryptos().subscribe((data: {}) => {
       let temp = data[Object.keys(data)[0]];
       console.log(temp.filter(coin => coin.statuses.length === 2));
       //this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
@@ -39,7 +39,7 @@ export class ConversionComponent implements OnInit {
     });
   }
   getConversion1(event) {
-    this.curr
+    this.currencyService
       .getCrypto(event.target.selectedOptions["0"].value)
       .subscribe((data: {}) => {
         if (typeof data["ticker"] === "undefined") {
@@ -54,7 +54,7 @@ export class ConversionComponent implements OnInit {
       });
   }
   getConversion2(event) {
-    this.curr
+    this.currencyService
       .getCrypto(event.target.selectedOptions["0"].value)
       .subscribe((data: {}) => {
         if (typeof data["ticker"] === "undefined") {
