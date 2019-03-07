@@ -7,8 +7,8 @@ import {
 import { Observable, of } from "rxjs";
 import { map, catchError, tap } from "rxjs/operators";
 
-const endpoint1 = "https://api.exchangeratesapi.io/";
-const endpoint2 = "https://api.cryptonator.com/api/";
+const exchangeRatesAPI = "https://api.exchangeratesapi.io/";
+const cryptonatorAPI = "https://api.cryptonator.com/api/";
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
@@ -40,20 +40,20 @@ export class CurrencyService {
   }
   getCurrencies(): Observable<any> {
     return this.http
-      .get(endpoint1 + "latest?base=USD")
+      .get(exchangeRatesAPI + "latest?base=USD")
       .pipe(map(this.extractData));
   }
   getCurrency(currencyCode): Observable<any> {
     return this.http
-      .get(endpoint1 + "latest?base=USD")
+      .get(exchangeRatesAPI + "latest?base=USD")
       .pipe(map(this.extractData));
   }
   getCryptos(): Observable<any> {
-    return this.http.get(endpoint2 + "currencies").pipe(map(this.extractData));
+    return this.http.get(cryptonatorAPI + "currencies").pipe(map(this.extractData));
   }
   getCrypto(cryptoCode): Observable<any> {
     return this.http
-      .get(endpoint2 + "ticker/" + cryptoCode + "-usd")
+      .get(cryptonatorAPI + "ticker/" + cryptoCode + "-usd")
       .pipe(map(this.extractData));
   }
 }

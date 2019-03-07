@@ -1,8 +1,5 @@
-import { map } from "rxjs/operators";
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { CurrencyService } from "./currency.service";
-import { AngularWaitBarrier } from "blocking-proxy/built/lib/angular_wait_barrier";
-import { initDomAdapter } from "@angular/platform-browser/src/browser";
 
 @Component({
   selector: "app-conversion",
