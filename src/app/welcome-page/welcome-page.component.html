@@ -1,10 +1,10 @@
 
 <p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <button (click)="getCrypto()">GET /products</button>
 
 
-<table mdbTable class="z-depth-1">
+<table mdbTable class="table table-sm table-striped">
   <!-- <thead>
   <tr>
     <th scope="col">#</th>
@@ -15,8 +15,8 @@
   </thead> -->
   <thead>
     <tr>
-      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypto" [sortBy]="headElements[i]">{{head}}
-        <mdb-icon fas icon="sort"></mdb-icon>
+      <th *ngFor="let head of headElements; index as i" scope="col" [attr.mdbTableSort]="crypto" [attr.sortBy]="headElements[i]">{{head}}
+        <mdb-icon fas icon="camera-retro"></mdb-icon> camera-retro
       </th>
     </tr>
   </thead>
@@ -25,11 +25,47 @@
       <th scope="row">{{i + 1}}</th>
       <td>{{cryptoRow.base}} </td>
       <td>${{cryptoRow.price}}</td>
-      <!-- <td>{{cryptoRow.change}} </td> -->
       <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
   </tr>
   </tbody>
 </table>
+
+
+
+
+<!-- <table matSort (matSortChange)="sortData($event)" matSortActive="base" matSortDirection="asc" matSortDisableClear>
+  <tr>
+      <th mat-sort-header="number">#</th>
+    <th mat-sort-header="base">Currency</th>
+    <th mat-sort-header="price">Value</th>
+    <th mat-sort-header="change">Change(24h)</th>
+  </tr>
+
+  <tr *ngFor="let cryptoRow of crypto; index as i">
+    <th scope="row">{{i + 1}}</th>
+    <td>{{cryptoRow.base}} </td>
+    <td>${{cryptoRow.price}}</td>
+    <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
+</tr>
+</table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <table class="table table-striped">
   <thead>

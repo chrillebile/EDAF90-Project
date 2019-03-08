@@ -1,11 +1,19 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyService } from 'src/app/conversion/currency.service';
 import { map, catchError, tap } from 'rxjs/operators';
 import {DecimalPipe} from '@angular/common';
 import {Observable} from 'rxjs';
+import { WavesModule, TableModule, IconsModule } from 'angular-bootstrap-md';
 
+@NgModule({
+
+  imports: [
+    IconsModule,
+  ],
+})
 @Component({
+  
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.css'],
   //selector: 'ngbd-table-complete',
@@ -47,4 +55,5 @@ import {Observable} from 'rxjs';
   
     constructor(public curr: CurrencyService, public httpClient: HttpClient){}
   
+
 } 
