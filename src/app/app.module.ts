@@ -10,12 +10,12 @@ import { WelcomePageComponent } from "./welcome-page/welcome-page.component";
 import { ConversionComponent } from "./conversion/conversion.component";
 import { FavoritesComponent } from "./favorites/favorites.component";
 import { SpecificInformationComponent } from "./specific-information/specific-information.component";
-
 import { CurrencyService } from "./conversion/currency.service";
-import { HttpClientModule } from "@angular/common/http";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
+import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
 
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     WelcomePageComponent,
     ConversionComponent,
     FavoritesComponent,
-    SpecificInformationComponent
+    SpecificInformationComponent,
+    SpecificInformationCryptoComponent
   ],
   imports: [
     BrowserModule,
