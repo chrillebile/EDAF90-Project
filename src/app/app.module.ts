@@ -12,6 +12,7 @@ import { SpecificInformationComponent } from './specific-information/specific-in
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SpecificInformationCryptoComponent } from './specific-information-crypt
     ConversionComponent,
     FavoritesComponent,
     SpecificInformationComponent,
-    SpecificInformationCryptoComponent
+    SpecificInformationCryptoComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
