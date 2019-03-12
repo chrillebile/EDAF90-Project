@@ -13,8 +13,8 @@ import { interval } from 'rxjs';
 export class GraphComponent implements OnInit {
 
   private id: string;
-  private dataPoints: any;
-  private chart: any;
+  private dataPoints: Array<any>;
+  private chart: CanvasJS;
 
   constructor(
     private _crypto: CryptonatorAPIService,
@@ -56,24 +56,24 @@ export class GraphComponent implements OnInit {
       }]
     });
 
-    // Update the chart
-    function updateChart(graphComp) {
-      graphComp._crypto.findOneFull(graphComp.id).subscribe(crypto => {
-        graphComp.dataPoints.push({ x: (crypto.timestamp * 1000), y: parseInt(crypto.price) });
-        if (graphComp.dataPoints.length > 20) {
-          graphComp.dataPoints.shift();
-        }
-        graphComp.chart.render();
-      });
-    }
-
     // Interval const for how often the chart should be updated
     const intervalCount = interval(60000);
 
     // Running one time when loading the first time before starting a timer for the update.
-    updateChart(this);
+    this.updateChart();
     intervalCount.subscribe(n => {
-      updateChart(this);
+      this.updateChart();
     })
+  }
+
+  // Update the chart
+  updateChart() {
+    this._crypto.findOneFull(this.id).subscribe(crypto => {
+      this.dataPoints.push({ x: (crypto.timestamp * 1000), y: parseInt(crypto.price.toString()) });
+      if (this.dataPoints.length > 20) {
+        this.dataPoints.shift();
+      }
+      this.chart.render();
+    });
   }
 }
