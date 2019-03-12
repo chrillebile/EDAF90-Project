@@ -10,8 +10,10 @@ import { ConversionComponent } from './conversion/conversion.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SpecificInformationComponent } from './specific-information/specific-information.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
+import { CurrencyService } from './conversion/currency.service';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -29,8 +31,11 @@ import { SpecificInformationCryptoComponent } from './specific-information-crypt
     NgbModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    CurrencyService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
