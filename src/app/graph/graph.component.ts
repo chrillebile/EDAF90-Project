@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from '../../assets/canvasjs.min.js'
 import { CryptonatorAPIService } from '../cryptonator-api.service';
-import { getLocaleDateTimeFormat } from '@angular/common';
+import { interval } from 'rxjs';
 
 
 @Component({
@@ -25,6 +25,7 @@ export class GraphComponent implements OnInit {
     this.id = this._route.snapshot.paramMap.get('id');
     this.dataPoints = [];
 
+    // Createing the chart
     this.chart = new CanvasJS.Chart('chartContainer', {
       exportEnabled: true,
       title: {
@@ -47,6 +48,7 @@ export class GraphComponent implements OnInit {
       }]
     });
 
+    // Update the chart
     function updateChart(graphComp) {
       graphComp._crypto.findOneFull(graphComp.id).subscribe(crypto => {
         graphComp.dataPoints.push({ x: (crypto.timestamp * 1000), y: parseInt(crypto.price) });
@@ -57,16 +59,13 @@ export class GraphComponent implements OnInit {
       });
     }
 
-    function createInterval(graphComp, interval) {
-      setInterval(
-        function () {
-          updateChart(graphComp);
-        },
-        interval
-      );
-    }
-    updateChart(this);
-    createInterval(this, 60000);
-  }
+    // Interval const for how often the chart should be updated
+    const intervalCount = interval(60000);
 
+    // Running one time when loading the first time before starting a timer for the update.
+    updateChart(this);
+    intervalCount.subscribe(n => {
+      updateChart(this);
+    })
+  }
 }
