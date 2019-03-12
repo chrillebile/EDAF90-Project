@@ -27,6 +27,7 @@ export class GraphComponent implements OnInit {
 
     // Createing the chart
     this.chart = new CanvasJS.Chart('chartContainer', {
+      theme: "light2",
       exportEnabled: true,
       title: {
         text: this.id.toUpperCase() + ' - USD'
@@ -39,6 +40,13 @@ export class GraphComponent implements OnInit {
         scaleBreaks: {
           autoCalculate: true
         },
+        crosshair: {
+          enabled: true,
+          valueFormatString: "#.##"
+        }
+      },
+      toolTip: {
+        content: "Time: {x}</br>USD: {y}"
       },
       data: [{
         type: "spline",
