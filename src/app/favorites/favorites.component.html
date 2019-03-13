@@ -16,7 +16,7 @@
   <tbody>
   <tr *ngFor="let cryptoRow of crypto; let i = index">
       <th scope="row">{{i + 1}}</th>
-      <td>{{cryptoRow.base}} </td>
+      <td><a class="nav-item nav-link" routerLink="specific/{{cryptoRow.base.toLowerCase()}}">{{cryptoRow.base}}</a></td>
       <td>${{cryptoRow.price}}</td>
       <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
   </tr>
