@@ -1,131 +1,28 @@
-
-<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<button (click)="getCrypto()">GET /products</button>
 
-
-<table mdbTable class="table table-sm table-striped">
-  <!-- <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Currency</th>
-    <th scope="col">Value</th>
-    <th scope="col">Change(24h)</th>
-  </tr>
-  </thead> -->
+<div class="row">
+  <div class="col-md-12 mx-auto">
+    <div class="md-form">
+      <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+      <label for="search">Search</label>
+    </div>
+  </div>
+</div>
+  <table mdbTable class="table table-sm table-striped">
   <thead>
     <tr>
-      <th *ngFor="let head of headElements; index as i" scope="col" [attr.mdbTableSort]="crypto" [attr.sortBy]="headElements[i]">{{head}}
-        <mdb-icon fas icon="camera-retro"></mdb-icon> camera-retro
+      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypto" [sortBy]="headElements[i]"> {{head}}
+        <mdb-icon fas icon="sort"></mdb-icon>
       </th>
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let cryptoRow of crypto; index as i">
+  <tr *ngFor="let cryptoRow of crypto; let i = index">
       <th scope="row">{{i + 1}}</th>
       <td>{{cryptoRow.base}} </td>
       <td>${{cryptoRow.price}}</td>
       <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
+      <td scope="row"><input type="checkbox" ng-model="checkboxModel.value1"></td>
   </tr>
   </tbody>
 </table>
-
-
-
-
-<!-- <table matSort (matSortChange)="sortData($event)" matSortActive="base" matSortDirection="asc" matSortDisableClear>
-  <tr>
-      <th mat-sort-header="number">#</th>
-    <th mat-sort-header="base">Currency</th>
-    <th mat-sort-header="price">Value</th>
-    <th mat-sort-header="change">Change(24h)</th>
-  </tr>
-
-  <tr *ngFor="let cryptoRow of crypto; index as i">
-    <th scope="row">{{i + 1}}</th>
-    <td>{{cryptoRow.base}} </td>
-    <td>${{cryptoRow.price}}</td>
-    <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
-</tr>
-</table> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col" sortable="base" (sort)="onSort($event)">Base</th>
-    <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
-    <th scope="col" sortable="changes" (sort)="onSort($event)">Changes</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let cryptoElement of cryptos>
-    <th scope="row">{{ cryptoElement }}</th>
-    <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-      {{ cryptoElement.base }}
-    </td>
-    <td>{{ cryptoElement.price | number }}</td>
-    <td>{{ cryptoElement.changes | number }}</td>
-  </tr>
-  </tbody>
-</table> -->
-
-<!-- <form>
-  <div class="form-group form-inline">
-      Full text search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm"/>
-      <span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
-  </div>
-
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col" sortable="base" (sort)="onSort($event)">Base</th>
-      <th scope="col" sortable="price" (sort)="onSort($event)">Price</th>
-      <th scope="col" sortable="changes" (sort)="onSort($event)">Changes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let cryptoElement of cryptos$ | async">
-      <th scope="row">{{ cryptoElement }}</th>
-      <td>
-        <ngb-highlight [result]="cryptoElement.base" [term]="service.searchTerm"></ngb-highlight>
-      </td>
-      <td><ngb-highlight [result]="cryptoElement.price | number" [term]="service.searchTerm"></ngb-highlight></td>
-      <td><ngb-highlight [result]="cryptoElement.change | number" [term]="service.searchTerm"></ngb-highlight></td>
-    </tr>
-    </tbody>
-  </table>
-
-  <div class="d-flex justify-content-between p-2">
-    <ngb-pagination
-      [collectionSize]="total$ | async" [(page)]="service.page" [pageSize]="service.pageSize">
-    </ngb-pagination>
-
-    <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="service.pageSize">
-      <option [ngValue]="2">2 items per page</option>
-      <option [ngValue]="4">4 items per page</option>
-      <option [ngValue]="6">6 items per page</option>
-    </select>
-  </div>
-
-</form> -->

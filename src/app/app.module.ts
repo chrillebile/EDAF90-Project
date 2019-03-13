@@ -10,12 +10,13 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SpecificInformationComponent } from './specific-information/specific-information.component';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CurrencyService } from './conversion/currency.service';
 import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { MdbTableSortDirective } from './mdb-table-sort.directive';
 
 
 @NgModule({
@@ -26,14 +27,16 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     WelcomePageComponent,
     ConversionComponent,
     FavoritesComponent,
-    SpecificInformationComponent
+    SpecificInformationComponent,
+    MdbTableSortDirective
   ],
   imports: [
     BrowserModule,
     NgbModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     CurrencyService

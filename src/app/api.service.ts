@@ -1,21 +1,94 @@
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+
+// @Injectable({
+//   providedIn: 'root'
+  
+// })
+// export class ApiService {
+//   private apiURL: string = 'https://api.cryptonator.com/api/ticker/btc-usd';
+//   private baseUrl : string = 'https://api.cryptonator.com/api/ticker/'
+//   private products = [];
+//   constructor(private httpClient: HttpClient) {}
+
+
+//   get_btc_usd(){
+//     this.httpClient.get(this.baseUrl + '/btc-usd').subscribe((res : any[])=>{
+//     console.log(res);
+//     this.products = res;
+//     });
+// }
+// }
+import { Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
-  
 })
-export class ApiService {
-  private apiURL: string = 'https://api.cryptonator.com/api/ticker/btc-usd';
-  private baseUrl : string = 'https://api.cryptonator.com/api/ticker/'
-  private products = [];
-  constructor(private httpClient: HttpClient) {}
+export class MdbTableService {
+  private _dataSource: any = [];
+  private _dataSourceChanged: Subject<any> = new Subject<any>();
+  constructor() { }
 
+  addRow(newRow: any) {
+    this.getDataSource().push(newRow);
+  }
 
-  get_btc_usd(){
-    this.httpClient.get(this.baseUrl + '/btc-usd').subscribe((res : any[])=>{
-    console.log(res);
-    this.products = res;
+  addRowAfter(index: number, row: any) {
+    this.getDataSource().splice(index, 0, row);
+  }
+
+  removeRow(index: number) {
+    this.getDataSource().splice(index, 1);
+  }
+
+  rowRemoved(): Observable<boolean> {
+    const rowRemoved = Observable.create((observer: any) => {
+      observer.next(true);
     });
-}
+    return rowRemoved;
+  }
+
+  removeLastRow() {
+    this.getDataSource().pop();
+  }
+
+  getDataSource() {
+    return this._dataSource;
+  }
+
+  setDataSource(data: any) {
+    this._dataSource = data;
+    this._dataSourceChanged.next(this.getDataSource());
+  }
+
+  dataSourceChange(): Observable<any> {
+    return this._dataSourceChanged;
+  }
+
+  filterLocalDataBy(searchKey: any) {
+    return this.getDataSource().filter((obj: Array<any>) => {
+      return Object.keys(obj).some((key: any) => {
+        return (obj[key].toString().toLowerCase()).includes(searchKey);
+      });
+    });
+  }
+
+  searchLocalDataBy(searchKey: any) {
+    if (!searchKey) {
+      return this.getDataSource();
+    }
+
+    if (searchKey) {
+      return this.filterLocalDataBy(searchKey);
+    }
+  }
+
+  searchDataObservable(searchKey: any): Observable<any> {
+    const observable = Observable.create((observer: any) => {
+      observer.next(this.searchLocalDataBy(searchKey));
+    });
+    return observable;
+  }
+
 }
