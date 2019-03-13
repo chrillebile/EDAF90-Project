@@ -12,6 +12,7 @@ import { SpecificInformationComponent } from './specific-information/specific-in
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
+import { GraphComponent } from './graph/graph.component';
 import { CurrencyService } from './conversion/currency.service';
 import { FormsModule } from "@angular/forms";
 
@@ -24,7 +25,8 @@ import { FormsModule } from "@angular/forms";
     ConversionComponent,
     FavoritesComponent,
     SpecificInformationComponent,
-    SpecificInformationCryptoComponent
+    SpecificInformationCryptoComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
