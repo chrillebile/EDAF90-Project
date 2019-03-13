@@ -16,7 +16,6 @@ import { HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { MdbTableSortDirective } from './mdb-table-sort.directive';
 
 
 @NgModule({
@@ -28,7 +27,7 @@ import { MdbTableSortDirective } from './mdb-table-sort.directive';
     ConversionComponent,
     FavoritesComponent,
     SpecificInformationComponent,
-    MdbTableSortDirective
+    
   ],
   imports: [
     BrowserModule,

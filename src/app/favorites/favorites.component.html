@@ -1,3 +1,24 @@
-<p>
-  favorites works!
-</p>
+<div class="row">
+  <div class="col-md-12 mx-auto">
+    <div class="md-form">
+      <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput>
+      <label for="search">Search</label>
+    </div>
+  </div>
+</div>
+  <table mdbTable class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypto" [sortBy]="headElements[i]"> {{head}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let cryptoRow of crypto; let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td>{{cryptoRow.base}} </td>
+      <td>${{cryptoRow.price}}</td>
+      <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
+  </tr>
+  </tbody>
+</table>
