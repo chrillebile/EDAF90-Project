@@ -17,8 +17,8 @@
   <tr *ngFor="let cryptoRow of crypto; let i = index" >
       <th scope="row">{{i + 1}}</th>
       <td><a class="nav-item nav-link" routerLink="specific/{{cryptoRow.base.toLowerCase()}}">{{cryptoRow.base}}</a></td>
-      <td>${{cryptoRow.price}}</td>
-      <td>{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</td>
+      <td><a class="nav-item nav-link" routerLink="specific/{{cryptoRow.base.toLowerCase()}}">${{cryptoRow.price}}</a></td>
+      <td><a class="nav-item nav-link" routerLink="specific/{{cryptoRow.base.toLowerCase()}}">{{cryptoRow.change.toString().substring(0,cryptoRow.change.indexOf(".")+4)}} %</a></td>
       <td scope="row"><input name={{cryptoRow.base}} type="checkbox" (change)="checked(cryptoRow, $event)"  id="cryptoRow{{i}}"> </td>
   </tr>
   </tbody>
