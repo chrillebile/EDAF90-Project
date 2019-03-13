@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 import { Component, OnInit, NgModule, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CurrencyService } from 'src/app/conversion/currency.service';
 import { MdbTableService, MDBBootstrapModule, IconsModule } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
-=======
-import { Component, OnInit } from '@angular/core';
->>>>>>> master
 
 @NgModule({
 
@@ -17,7 +13,6 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 @Component({
-<<<<<<< HEAD
   
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.css'],
@@ -78,17 +73,3 @@ import { Component, OnInit } from '@angular/core';
       localStorage.setItem(name,checked);
     }
 } 
-=======
-  selector: 'app-welcome-page',
-  templateUrl: './welcome-page.component.html',
-  styleUrls: ['./welcome-page.component.css']
-})
-export class WelcomePageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
->>>>>>> master
