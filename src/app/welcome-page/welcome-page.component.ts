@@ -28,11 +28,12 @@ import { MdbTableSortDirective } from 'src/app/mdb-table-sort.directive';
   export class WelcomePageComponent implements OnInit{
     headElements = ['#', 'Currency', 'Value', 'Change(24h)', 'Favorite'];
     crypto: any = [];
+    crypte: any = [];
     private baseUrl = 'https://api.cryptonator.com/api/ticker'
     private products = [];
     ngOnInit() {
       for (let i = 1; i <= 31; i++) {
-        this.crypto.push({ id: i, first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i });
+        this.crypte.push({ '#': i, Currency: 'User ' + i, Value: 'Name ' + i, 'Change(24h)': 'Handle ' + i });
       }
       this.getCrypto();
       
