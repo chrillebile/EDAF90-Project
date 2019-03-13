@@ -40,6 +40,9 @@ import { BrowserModule } from '@angular/platform-browser';
       temp = temp.filter(coin => coin.statuses.length === 2);
       temp.map(coin => {
         this.getCryptoProps(coin.code);
+        if(localStorage.getItem(coin.code)==null){
+          localStorage.setItem(coin.code,'false');
+        }
       }); 
     });
   }
