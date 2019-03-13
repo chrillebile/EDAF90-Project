@@ -37,8 +37,9 @@ import { BrowserModule } from '@angular/platform-browser';
   getCrypto() {
     this.crypto = [];
     var temp; 
+    
     for(var key in localStorage){
-      if(localStorage.getItem(key)){
+      if(localStorage.getItem(key)=='true'){
       this.getCryptoProps(key);
       }
     }
