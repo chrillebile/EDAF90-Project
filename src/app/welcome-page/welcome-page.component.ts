@@ -32,9 +32,7 @@ import { MdbTableSortDirective } from 'src/app/mdb-table-sort.directive';
     private baseUrl = 'https://api.cryptonator.com/api/ticker'
     private products = [];
     ngOnInit() {
-      for (let i = 1; i <= 31; i++) {
-        this.crypte.push({ '#': i, Currency: 'User ' + i, Value: 'Name ' + i, 'Change(24h)': 'Handle ' + i });
-      }
+     
       this.getCrypto();
       
     }

@@ -11,7 +11,7 @@
   <table mdbTable class="table table-sm table-striped">
   <thead>
     <tr>
-      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypte" [sortBy]="headElements[i]"> {{head}}
+      <th *ngFor="let head of headElements; let i = index" scope="col" [mdbTableSort]="crypto[i]" [sortBy]="headElements[i]"> {{head}}
         <mdb-icon fas icon="sort"></mdb-icon>
       </th>
     </tr>
