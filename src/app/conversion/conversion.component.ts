@@ -50,7 +50,7 @@ export class ConversionComponent implements OnInit {
         if (typeof data["ticker"] === "undefined") {
           this.rate1 = 0;
           this.alerts[0] ={
-            message:("could not find conversion for " +
+            message:('could not find conversion for ' +
               event.target.selectedOptions["0"].value)
           };
 
@@ -70,7 +70,7 @@ export class ConversionComponent implements OnInit {
         if (typeof data["ticker"] === "undefined") {
           this.rate2 = 0;
           this.alerts[0] ={
-            message:("could not find conversion for " +
+            message:('could not find conversion for ' +
               event.target.selectedOptions["0"].value)
           };
           return;
@@ -80,7 +80,7 @@ export class ConversionComponent implements OnInit {
   }
   convert(event) {
     if (this.rate1 === 0 || this.rate2 === 0) {
-      this.alerts[0] = {message:("Both currencies must be selected!")};
+      this.alerts[0] = {message:('Both currencies must be selected!')};
       return;
     }
     this.output = (this.input * this.rate1) / this.rate2;
