@@ -9,9 +9,11 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { SpecificInformationComponent } from './specific-information/specific-information.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
+import { GraphComponent } from './graph/graph.component';
 import { CurrencyService } from './conversion/currency.service';
 import { FormsModule } from "@angular/forms";
 
@@ -24,7 +26,8 @@ import { FormsModule } from "@angular/forms";
     ConversionComponent,
     FavoritesComponent,
     SpecificInformationComponent,
-    SpecificInformationCryptoComponent
+    SpecificInformationCryptoComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { FormsModule } from "@angular/forms";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     CurrencyService,

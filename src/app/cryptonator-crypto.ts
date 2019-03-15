@@ -5,8 +5,10 @@ export class CryptonatorCrypto {
   price: number;
   target: string;
   volume: number;
+  timestamp: number;
 
-  constructor(values: Object = {}) {
+  constructor(values: Object = {}, time: number) {
     Object.assign(this, values);
+    this.timestamp = time;
   }
 }

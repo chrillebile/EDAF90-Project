@@ -18,6 +18,6 @@ export class CryptonatorAPIService {
    */
   findOneFull(id: string): Observable<CryptonatorCrypto> {
     return this.http.get(API_URL + 'full/' + id + '-usd')
-      .pipe(map((item: any) => new CryptonatorCrypto(item.ticker)));
+      .pipe(map((item: any) => new CryptonatorCrypto(item.ticker, item.timestamp)));
   }
 }
