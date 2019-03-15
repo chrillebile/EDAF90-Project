@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from "@angular/core";
-import { CurrencyService } from "./currency.service";
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { CurrencyService } from './currency.service';
 
 @Component({
-  selector: "app-conversion",
-  templateUrl: "./conversion.component.html",
-  styleUrls: ["./conversion.component.css"]
+  selector: 'app-conversion',
+  templateUrl: './conversion.component.html',
+  styleUrls: ['./conversion.component.css']
 })
 export class ConversionComponent implements OnInit {
   crypto: any = [];
@@ -19,7 +19,7 @@ export class ConversionComponent implements OnInit {
   constructor(public currencyService: CurrencyService) {}
 
   ngOnInit() {
-    //this.getCurrencies();
+    // this.getCurrencies();
     this.getCrypto();
   }
   /*
@@ -33,9 +33,9 @@ export class ConversionComponent implements OnInit {
   getCrypto() {
     this.crypto = [];
     this.currencyService.getCryptos().subscribe((data: {}) => {
-      let temp = data[Object.keys(data)[0]];
+      const temp = data[Object.keys(data)[0]];
       console.log(temp.filter(coin => coin.statuses.length === 2));
-      //this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
+      // this.crypto = temp.filter(coin => coin.statuses.includes('primary'));
       this.crypto = temp.filter(coin => coin.statuses.length === 2);
     });
   }
@@ -45,18 +45,17 @@ export class ConversionComponent implements OnInit {
       return;
     }
     this.currencyService
-      .getCrypto(event.target.selectedOptions["0"].value)
+      .getCrypto(event.target.selectedOptions['0'].value)
       .subscribe((data: {}) => {
-        if (typeof data["ticker"] === "undefined") {
+        if (typeof data['ticker'] === 'undefined') {
           this.rate1 = 0;
           this.alerts[0] ={
             message:('could not find conversion for ' +
               event.target.selectedOptions["0"].value)
           };
-
           return;
         }
-        this.rate1 = data["ticker"]["price"];
+        this.rate1 = data['ticker']['price'];
       });
   }
   getConversion2(event) {
@@ -65,9 +64,9 @@ export class ConversionComponent implements OnInit {
       return;
     }
     this.currencyService
-      .getCrypto(event.target.selectedOptions["0"].value)
+      .getCrypto(event.target.selectedOptions['0'].value)
       .subscribe((data: {}) => {
-        if (typeof data["ticker"] === "undefined") {
+        if (typeof data['ticker'] === 'undefined') {
           this.rate2 = 0;
           this.alerts[0] ={
             message:('could not find conversion for ' +
@@ -75,7 +74,7 @@ export class ConversionComponent implements OnInit {
           };
           return;
         }
-        this.rate2 = data["ticker"]["price"];
+        this.rate2 = data['ticker']['price'];
       });
   }
   convert(event) {

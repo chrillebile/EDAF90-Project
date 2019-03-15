@@ -7,7 +7,7 @@ import { CryptonatorCrypto } from '../cryptonator-crypto';
   styleUrls: ['./specific-information-crypto.component.css']
 })
 export class SpecificInformationCryptoComponent implements OnInit {
-  @Input() crypto : CryptonatorCrypto;
+  @Input() crypto: CryptonatorCrypto;
 
   constructor() { }
 
