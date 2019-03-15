@@ -2,6 +2,9 @@
   <h1>
     Cryptocurrency calculator
   </h1>
+  <p *ngFor="let alert of alerts" >
+    <ngb-alert [dismissible]="true" (close)="close()" >{{alert.message}}</ngb-alert>
+  </p>
   <br />
   <br />
   <div class="block">
