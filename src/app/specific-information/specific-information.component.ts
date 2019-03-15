@@ -22,6 +22,6 @@ export class SpecificInformationComponent implements OnInit {
     this.cryptonatorAPIService.findOneFull(this.id).subscribe((crypto: CryptonatorCrypto) => {
       this.specificCrypto = crypto;
       console.log(this.specificCrypto);
-    })
+    });
   }
 }
