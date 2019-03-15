@@ -15,7 +15,7 @@ import { HttpClient, HttpClientModule, HttpHandler, HttpErrorResponse } from '@a
 import { SpecificInformationCryptoComponent } from './specific-information-crypto/specific-information-crypto.component';
 import { GraphComponent } from './graph/graph.component';
 import { CurrencyService } from './conversion/currency.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [

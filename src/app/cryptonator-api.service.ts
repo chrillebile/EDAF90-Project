@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators'
 import { CryptonatorCrypto } from './cryptonator-crypto';
 
-const API_URL = 'https://api.cryptonator.com/api/';
+const API_URL = "https://api.cryptonator.com/api/";
 
 @Injectable({
   providedIn: 'root'

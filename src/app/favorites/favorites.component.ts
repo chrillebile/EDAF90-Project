@@ -14,62 +14,62 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
 })
 @Component({
-
+  
   templateUrl: './favorites.component.html',
   styleUrls: ['./favorites.component.css'],
   })
-  export class FavoritesComponent implements OnInit {
+  export class FavoritesComponent implements OnInit{
     name = 'Angular';
     headElements = ['#', 'Currency', 'Value', 'Change(24h)'];
     crypto: any = [];
-    private baseUrl = 'https://api.cryptonator.com/api/ticker';
+    private baseUrl = 'https://api.cryptonator.com/api/ticker'
     private products = [];
-    searchText = '';
+    searchText: string = '';
   previous: string;
     ngOnInit() {
 
-    this.getCrypto();
+    this.getCrypto();  
     this.tableService.setDataSource(this.crypto);
     this.crypto = this.tableService.getDataSource();
     this.previous = this.tableService.getDataSource();
     }
-
+  
   getCrypto() {
     this.crypto = [];
-    let temp;
-
-    for (const key in localStorage) {
-      if (localStorage.getItem(key) == 'true') {
+    var temp; 
+    
+    for(var key in localStorage){
+      if(localStorage.getItem(key)=='true'){
       this.getCryptoProps(key);
       }
     }
   }
-
-  getCryptoProps(cryptoCode) {
+  
+  getCryptoProps(cryptoCode){
     this.httpClient.get('https://api.cryptonator.com/api/' + 'ticker/' + cryptoCode.toLowerCase() +  '-usd').subscribe(res => {
-     if (res.ticker) {
-     this.crypto.push(res.ticker);
+     if(res['ticker']){
+     this.crypto.push(res['ticker']);
      }
-    });
+    });  
   }
-
-    constructor(public curr: CurrencyService, public httpClient: HttpClient, private tableService: MdbTableService) {}
-
+  
+    constructor(public curr: CurrencyService, public httpClient: HttpClient,private tableService: MdbTableService){}
+  
     @HostListener('input') oninput() {
       this.searchItems();
     }
     searchItems() {
       const prev = this.tableService.getDataSource();
-
+  
       if (!this.searchText) {
         this.tableService.setDataSource(this.previous);
         this.crypto = this.tableService.getDataSource();
       }
-
+  
       if (this.searchText) {
         this.crypto = this.tableService.searchLocalDataBy(this.searchText.toLowerCase());
         this.tableService.setDataSource(prev);
       }
-
+  
     }
-}
+} 

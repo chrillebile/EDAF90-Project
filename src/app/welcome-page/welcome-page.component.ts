@@ -13,50 +13,50 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
 })
 @Component({
-
+  
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.css'],
   })
-  export class WelcomePageComponent implements OnInit {
+  export class WelcomePageComponent implements OnInit{
     headElements = ['#', 'Currency', 'Value', 'Change(24h)', 'Favorite'];
     crypto: any = [];
-    private baseUrl = 'https://api.cryptonator.com/api/ticker';
+    private baseUrl = 'https://api.cryptonator.com/api/ticker'
     private products = [];
-    searchText = '';
+    searchText: string = '';
   previous: string;
     ngOnInit() {
-
-    this.getCrypto();
+    
+    this.getCrypto();  
     this.tableService.setDataSource(this.crypto);
     this.crypto = this.tableService.getDataSource();
     this.previous = this.tableService.getDataSource();
     }
-
+    
   getCrypto() {
     this.crypto = [];
-    let temp;
+    var temp; 
     this.curr.getCryptos().subscribe((data: {}) => {
      let temp = data[Object.keys(data)[0]];
-     temp = temp.filter(coin => coin.statuses.length === 2);
-     temp.map(coin => {
+      temp = temp.filter(coin => coin.statuses.length === 2);
+      temp.map(coin => {
         this.getCryptoProps(coin.code);
-        if (localStorage.getItem(coin.code) == null) {
-          localStorage.setItem(coin.code, 'false');
+        if(localStorage.getItem(coin.code)==null){
+          localStorage.setItem(coin.code,'false');
         }
-      });
+      }); 
     });
   }
-
-  getCryptoProps(cryptoCode) {
+  
+  getCryptoProps(cryptoCode){
     this.httpClient.get('https://api.cryptonator.com/api/' + 'ticker/' + cryptoCode.toLowerCase() +  '-usd').subscribe(res => {
-     if (res.ticker) {
-     this.crypto.push(res.ticker);
+     if(res['ticker']){
+     this.crypto.push(res['ticker']);
      }
-    });
+    });  
   }
-
-    constructor(public curr: CurrencyService, public httpClient: HttpClient, private tableService: MdbTableService) {}
-
+  
+    constructor(public curr: CurrencyService, public httpClient: HttpClient,private tableService: MdbTableService){}
+  
     @HostListener('input') oninput() {
       this.searchItems();
     }
@@ -73,6 +73,6 @@ import { BrowserModule } from '@angular/platform-browser';
     }
     checked(currentValue: any, event: any) {
       const { checked, name } = event.target;
-      localStorage.setItem(name, checked);
+      localStorage.setItem(name,checked);
     }
-}
+} 

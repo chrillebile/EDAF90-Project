@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from '../../assets/canvasjs.min.js';
+import * as CanvasJS from '../../assets/canvasjs.min.js'
 import { CryptonatorAPIService } from '../cryptonator-api.service';
 import { interval } from 'rxjs';
 
@@ -27,13 +27,13 @@ export class GraphComponent implements OnInit {
 
     // Createing the chart
     this.chart = new CanvasJS.Chart('chartContainer', {
-      theme: 'light2',
+      theme: "light2",
       exportEnabled: true,
       title: {
         text: this.id.toUpperCase() + ' - USD'
       },
       axisX: {
-        valueFormatString: 'HH:mm:ss',
+        valueFormatString: "HH:mm:ss",
       },
       axisY: {
         includeZero: false,
@@ -42,17 +42,17 @@ export class GraphComponent implements OnInit {
         },
         crosshair: {
           enabled: true,
-          valueFormatString: '#.##'
+          valueFormatString: "#.##"
         }
       },
       toolTip: {
-        content: 'Time: {x}</br>USD: {y}'
+        content: "Time: {x}</br>USD: {y}"
       },
       data: [{
-        type: 'spline',
+        type: "spline",
         dataPoints: this.dataPoints,
-        xValueType: 'dateTime',
-        color: '#F08080',
+        xValueType: "dateTime",
+        color: "#F08080",
       }]
     });
 
@@ -63,7 +63,7 @@ export class GraphComponent implements OnInit {
     this.updateChart();
     intervalCount.subscribe(n => {
       this.updateChart();
-    });
+    })
   }
 
   // Update the chart
